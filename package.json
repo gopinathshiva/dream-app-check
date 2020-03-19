@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "test-phantomjs": "ng test --browsers PhantomJS --watch=false --reporters teamcity",
-    "test-chrome": "ng test --browsers ChromeHeadless --watch=false --reporters teamcity",
+    "test-phantomjs": "ng test --browsers PhantomJS --watch=false --reporters teamcity --code-coverage",
+    "test-chrome": "ng test --browsers ChromeHeadless --watch=false --reporters teamcity --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
