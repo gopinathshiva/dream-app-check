@@ -32,8 +32,10 @@ project {
 
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
-    buildType(Build)
-    buildType(Test)
+    sequential {
+      buildType(Build)
+      buildType(Test)
+    }
 
     features {
         feature {
@@ -110,11 +112,6 @@ object Test : BuildType({
 
     triggers {
         vcs {
-        }
-    }
-
-    dependencies {
-        snapshot(Build) {
         }
     }
 })
