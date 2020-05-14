@@ -160,7 +160,7 @@ object Build : BuildType({
 //      }
         script{
           name = "echo"
-          scriptContent = "Build successful, %teamcity.build.branch%"
+          scriptContent = "Build successful"
         }
     }
 
