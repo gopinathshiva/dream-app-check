@@ -84,6 +84,11 @@ object Test : BuildType({
 
   artifactRules = "coverage/my-dream-app => coverage.zip"
 
+  triggers {
+    vcs {
+    }
+  }
+
 })
 
 object Build : BuildType({
