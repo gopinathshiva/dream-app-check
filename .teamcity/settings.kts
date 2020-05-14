@@ -39,7 +39,7 @@ project {
 
     val buildChain = sequential {
       buildType(Build)
-      parallel(options = { onDependencyFailure = FailureAction.CANCEL }) {
+      parallel {
         buildType(FirefoxTest)
         buildType(ChromeTest)
       }
