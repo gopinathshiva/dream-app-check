@@ -33,6 +33,9 @@ project {
 
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
+    buildType(Build)
+    buildType(Test)
+  
     sequential {
       buildType(Build)
       buildType(Test)
