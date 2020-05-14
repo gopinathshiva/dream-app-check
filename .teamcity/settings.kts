@@ -138,7 +138,7 @@ object Build : BuildType({
 //      }
         script{
           name = "echo"
-          scriptContent = "echo Build successful"
+          scriptContent = "echo successful"
         }
     }
 
