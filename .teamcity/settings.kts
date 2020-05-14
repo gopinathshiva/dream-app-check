@@ -2,7 +2,6 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
-import jetbrains.buildServer.configs.kotlin.v2019_2.ui.add
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
@@ -37,57 +36,25 @@ project {
     buildType(Test)
 
     features {
-      add {
         feature {
-          type = "project-graphs"
-          id = "PROJECT_EXT_5"
-          param("series", """
-                      [
-                        {
-                          "type": "valueType",
-                          "title": "Build Duration (excluding Checkout Time)",
-                          "sourceBuildTypeId": "DreamAppCheck_Build",
-                          "key": "BuildDurationNetTime"
-                        }
-                      ]
-                  """.trimIndent())
-          param("format", "text")
-          param("title", "New chart title")
-          param("seriesTitle", "Serie")
+            id = "PROJECT_EXT_5"
+            type = "project-graphs"
+            param("series", """
+                [
+                  {
+                    "type": "valueType",
+                    "title": "Build Duration (excluding Checkout Time)",
+                    "sourceBuildTypeId": "DreamAppCheck_Build",
+                    "key": "BuildDurationNetTime"
+                  }
+                ]
+            """.trimIndent())
+            param("format", "text")
+            param("title", "New chart title")
+            param("seriesTitle", "Serie")
         }
-      }
     }
 }
-
-object Test : BuildType({
-  name = "Test"
-
-  vcs {
-    root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
-  }
-
-  steps{
-    script {
-      name = "Test"
-      scriptContent = """
-          npm run test-phantomjs
-          npm run test-chrome
-        """.trimIndent()
-    }
-  }
-
-  dependencies{
-    snapshot(Build){}
-  }
-
-  artifactRules = "coverage/my-dream-app => coverage.zip"
-
-  triggers {
-    vcs {
-    }
-  }
-
-})
 
 object Build : BuildType({
     name = "Build"
@@ -96,19 +63,19 @@ object Build : BuildType({
         root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
     }
 
-    steps{
-      script {
-        name = "Install"
-        scriptContent = "npm install"
-      }
-      script {
-        name = "Lint"
-        scriptContent = "npm run lint"
-      }
-      script {
-        name = "Build"
-        scriptContent = "npm run build"
-      }
+    steps {
+        script {
+            name = "Install"
+            scriptContent = "npm install"
+        }
+        script {
+            name = "Lint"
+            scriptContent = "npm run lint"
+        }
+        script {
+            name = "Build"
+            scriptContent = "npm run build"
+        }
     }
 
     triggers {
@@ -117,7 +84,38 @@ object Build : BuildType({
     }
 
     features {
-      swabra {  }
+        swabra {
+        }
+    }
+})
+
+object Test : BuildType({
+    name = "Test"
+
+    artifactRules = "coverage/my-dream-app => coverage.zip"
+
+    vcs {
+        root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
+    }
+
+    steps {
+        script {
+            name = "Test"
+            scriptContent = """
+                npm run test-phantomjs
+                npm run test-chrome
+            """.trimIndent()
+        }
+    }
+
+    triggers {
+        vcs {
+        }
+    }
+
+    dependencies {
+        snapshot(Build) {
+        }
     }
 })
 
