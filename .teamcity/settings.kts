@@ -120,9 +120,7 @@ object Build : BuildType({
     vcs {
         root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
     }
-
-//    name = "${DslContext.getParameter("name", "Default name")}
-
+  
     steps{
 //      script {
 //        name = "Install"
@@ -138,7 +136,7 @@ object Build : BuildType({
 //      }
         script{
           name = "echo"
-          scriptContent = "echo successful"
+          scriptContent = "echo successful %teamcity.build.branch%"
         }
     }
 
