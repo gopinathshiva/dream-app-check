@@ -17,5 +17,8 @@ changeProject(DslContext.projectId) {
         add {
             param("system.something", "something")
         }
+        add {
+            param("env.asdf", "asdf")
+        }
     }
 }
