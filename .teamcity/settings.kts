@@ -34,18 +34,18 @@ project {
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
 //    buildType(Build)
-    buildType(FirefoxTest)
-    buildType(ChromeTest)
+//    buildType(FirefoxTest)
+//    buildType(ChromeTest)
 
-//    val buildChain = sequential {
-//      buildType(Build)
-//      parallel {
-//        buildType(FirefoxTest)
-//        buildType(ChromeTest)
-//      }
-//    }
-//
-//    buildChain.buildTypes().forEach { buildType(it) }
+    val buildChain = sequential {
+      buildType(Build)
+      parallel {
+        buildType(FirefoxTest)
+        buildType(ChromeTest)
+      }
+    }
+
+    buildChain.buildTypes().forEach { buildType(it) }
 }
 
 object FirefoxTest : BuildType({
@@ -138,7 +138,7 @@ object Build : BuildType({
 //      }
         script{
           name = "echo"
-          scriptContent = "Build successful"
+          scriptContent = "echo Build successful"
         }
     }
 
