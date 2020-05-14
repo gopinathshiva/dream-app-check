@@ -33,15 +33,19 @@ project {
 
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
-    val buildChain = sequential {
-      buildType(Build)
-      parallel {
-        buildType(FirefoxTest)
-        buildType(ChromeTest)
-      }
-    }
+    buildType(Build)
+    buildType(FirefoxTest)
+    buildType(ChromeTest)
 
-    buildChain.buildTypes().forEach { buildType(it) }
+//    val buildChain = sequential {
+//      buildType(Build)
+//      parallel {
+//        buildType(FirefoxTest)
+//        buildType(ChromeTest)
+//      }
+//    }
+//
+//    buildChain.buildTypes().forEach { buildType(it) }
 
     features {
       add {
@@ -74,11 +78,15 @@ object FirefoxTest : BuildType({
   }
 
   steps{
+//    script {
+//      name = "Firefox Test"
+//      scriptContent = """
+//          npm run test-Firefox
+//        """.trimIndent()
+//    }
     script {
-      name = "Firefox Test"
-      scriptContent = """
-          npm run test-Firefox
-        """.trimIndent()
+      name = "echo"
+      scriptContent = "echo Firefox successful"
     }
   }
 
@@ -87,6 +95,10 @@ object FirefoxTest : BuildType({
   triggers {
     vcs {
     }
+  }
+
+  dependencies {
+    snapshot(Build){}
   }
 
 })
@@ -99,11 +111,15 @@ object ChromeTest : BuildType({
   }
 
   steps{
+//    script {
+//      name = "Chrome Test"
+//      scriptContent = """
+//          npm run test-chrome
+//        """.trimIndent()
+//    }
     script {
-      name = "Chrome Test"
-      scriptContent = """
-          npm run test-chrome
-        """.trimIndent()
+      name = "echo"
+      scriptContent = "echo chrome successful"
     }
   }
 
@@ -112,6 +128,10 @@ object ChromeTest : BuildType({
   triggers {
     vcs {
     }
+  }
+
+  dependencies {
+    snapshot(Build){}
   }
 
 })
@@ -124,18 +144,22 @@ object Build : BuildType({
     }
 
     steps{
-      script {
-        name = "Install"
-        scriptContent = "npm install"
-      }
-      script {
-        name = "Lint"
-        scriptContent = "npm run lint"
-      }
-      script {
-        name = "Build"
-        scriptContent = "npm run build"
-      }
+//      script {
+//        name = "Install"
+//        scriptContent = "npm install"
+//      }
+//      script {
+//        name = "Lint"
+//        scriptContent = "npm run lint"
+//      }
+//      script {
+//        name = "Build"
+//        scriptContent = "npm run build"
+//      }
+        script{
+          name = "echo"
+          scriptContent = "echo Build Successful"
+        }
     }
 
     triggers {
