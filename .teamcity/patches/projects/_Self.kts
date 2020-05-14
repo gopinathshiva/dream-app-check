@@ -14,5 +14,8 @@ changeProject(DslContext.projectId) {
         add {
             param("name", "shiva")
         }
+        add {
+            param("system.something", "something")
+        }
     }
 }
