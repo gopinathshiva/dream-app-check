@@ -46,3 +46,4 @@ testem.log
 Thumbs.db
 
 /deploy
+/.teamcity/target

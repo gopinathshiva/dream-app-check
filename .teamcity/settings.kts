@@ -39,7 +39,7 @@ project {
 
     val buildChain = sequential {
       buildType(Build)
-      parallel(options = { onDependencyFailure = FailureAction.CANCEL }) {
+      parallel {
         buildType(FirefoxTest)
         buildType(ChromeTest)
       }
@@ -143,6 +143,8 @@ object Build : BuildType({
         root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
     }
 
+//    name = "${DslContext.getParameter("name", "Default name")}
+
     steps{
 //      script {
 //        name = "Install"
@@ -158,7 +160,7 @@ object Build : BuildType({
 //      }
         script{
           name = "echo"
-          scriptContent = "Exit 1"
+          scriptContent = "Build successful"
         }
     }
 
