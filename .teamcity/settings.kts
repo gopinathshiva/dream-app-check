@@ -2,6 +2,8 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2019_2.ui.add
+import jetbrains.buildServer.configs.kotlin.v2019_2.ui.id
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
@@ -34,27 +36,27 @@ project {
 
     buildType(Build)
 
-    features {
+  features {
+    add {
       feature {
-        id = "PROJECT_EXT_3"
         type = "project-graphs"
+        id = "PROJECT_EXT_5"
         param("series", """
-                  [
-                    {
-                      "type": "valueType",
-                      "title": "Build Duration (excluding Checkout Time)",
-                      "sourceBuildTypeId": "AngularCliApp_Build",
-                      "key": "BuildDurationNetTime"
-                    }
-                  ]
-              """.trimIndent())
+                    [
+                      {
+                        "type": "valueType",
+                        "title": "Build Duration (excluding Checkout Time)",
+                        "sourceBuildTypeId": "DreamAppCheck_Build",
+                        "key": "BuildDurationNetTime"
+                      }
+                    ]
+                """.trimIndent())
         param("format", "text")
-        param("hideFilters", "")
-        param("title", "Build Duration")
-        param("defaultFilters", "")
+        param("title", "New chart title")
         param("seriesTitle", "Serie")
       }
     }
+  }
 }
 
 object Build : BuildType({
