@@ -1,4 +1,5 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
@@ -32,6 +33,28 @@ project {
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
     buildType(Build)
+
+    features {
+      feature {
+        id = "PROJECT_EXT_3"
+        type = "project-graphs"
+        param("series", """
+                  [
+                    {
+                      "type": "valueType",
+                      "title": "Build Duration (excluding Checkout Time)",
+                      "sourceBuildTypeId": "AngularCliApp_Build",
+                      "key": "BuildDurationNetTime"
+                    }
+                  ]
+              """.trimIndent())
+        param("format", "text")
+        param("hideFilters", "")
+        param("title", "Build Duration")
+        param("defaultFilters", "")
+        param("seriesTitle", "Serie")
+      }
+    }
 }
 
 object Build : BuildType({
@@ -66,6 +89,10 @@ object Build : BuildType({
     triggers {
         vcs {
         }
+    }
+
+    features {
+      swabra {  }
     }
 })
 
