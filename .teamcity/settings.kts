@@ -33,19 +33,19 @@ project {
 
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
-    buildType(Build)
-    buildType(FirefoxTest)
-    buildType(ChromeTest)
+//    buildType(Build)
+//    buildType(FirefoxTest)
+//    buildType(ChromeTest)
 
-//    val buildChain = sequential {
-//      buildType(Build)
-//      parallel {
-//        buildType(FirefoxTest)
-//        buildType(ChromeTest)
-//      }
-//    }
-//
-//    buildChain.buildTypes().forEach { buildType(it) }
+    val buildChain = sequential {
+      buildType(Build)
+      parallel {
+        buildType(FirefoxTest)
+        buildType(ChromeTest)
+      }
+    }
+
+    buildChain.buildTypes().forEach { buildType(it) }
 
     features {
       add {
@@ -97,9 +97,9 @@ object FirefoxTest : BuildType({
     }
   }
 
-  dependencies {
-    snapshot(Build){}
-  }
+//  dependencies {
+//    snapshot(Build){}
+//  }
 
 })
 
@@ -130,9 +130,9 @@ object ChromeTest : BuildType({
     }
   }
 
-  dependencies {
-    snapshot(Build){}
-  }
+//  dependencies {
+//    snapshot(Build){}
+//  }
 
 })
 
