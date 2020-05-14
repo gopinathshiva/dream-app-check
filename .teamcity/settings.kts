@@ -1,4 +1,5 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
@@ -38,6 +39,28 @@ object Build : BuildType({
 
     vcs {
         root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
+    }
+
+    steps{
+      script {
+        name = "Install"
+        scriptContent = "npm install"
+      }
+      script {
+        name = "Lint"
+        scriptContent = "npm run lint"
+      }
+      script {
+        name = "Test"
+        scriptContent = """
+          npm run test-phantomjs
+          npm run test-chrome
+        """.trimIndent()
+      }
+      script {
+        name = "Build"
+        scriptContent = "npm run build"
+      }
     }
 
     triggers {
