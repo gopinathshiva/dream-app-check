@@ -33,7 +33,7 @@ project {
 
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
-    buildType(Build)
+//    buildType(Build)
     buildType(FirefoxTest)
     buildType(ChromeTest)
 
