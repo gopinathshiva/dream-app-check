@@ -33,13 +33,15 @@ project {
 
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
-    buildType(Build)
-    buildType(Test)
-  
-    sequential {
+    val buildChain = sequential {
       buildType(Build)
-      buildType(Test)
+      parallel {
+        buildType(PhantomTest)
+        buildType(ChromeTest)
+      }
     }
+
+    buildChain.buildTypes().forEach { buildType(it) }
 
     features {
       add {
@@ -64,8 +66,8 @@ project {
     }
 }
 
-object Test : BuildType({
-  name = "Test"
+object PhantomTest : BuildType({
+  name = "Phantom Test"
 
   vcs {
     root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
@@ -73,16 +75,36 @@ object Test : BuildType({
 
   steps{
     script {
-      name = "Test"
+      name = "Phantom Test"
       scriptContent = """
           npm run test-phantomjs
-          npm run test-chrome
         """.trimIndent()
     }
   }
 
-  dependencies{
-    snapshot(Build){}
+  artifactRules = "coverage/my-dream-app => coverage.zip"
+
+  triggers {
+    vcs {
+    }
+  }
+
+})
+
+object ChromeTest : BuildType({
+  name = "Chrome Test"
+
+  vcs {
+    root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
+  }
+
+  steps{
+    script {
+      name = "Chrome Test"
+      scriptContent = """
+          npm run test-chrome
+        """.trimIndent()
+    }
   }
 
   artifactRules = "coverage/my-dream-app => coverage.zip"
