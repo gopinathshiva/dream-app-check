@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "test-phantomjs": "ng test --browsers PhantomJS --watch=false --reporters teamcity --code-coverage",
+    "test-firefox": "ng test --browsers FirefoxHeadless --watch=false --reporters teamcity --code-coverage",
     "test-chrome": "ng test --browsers ChromeHeadless --watch=false --reporters teamcity --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -42,7 +42,7 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
-    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-firefox-launcher": "^1.3.0",
     "karma-teamcity-reporter": "^1.1.0",
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",

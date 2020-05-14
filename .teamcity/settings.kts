@@ -36,7 +36,7 @@ project {
     val buildChain = sequential {
       buildType(Build)
       parallel {
-        buildType(PhantomTest)
+        buildType(FirefoxTest)
         buildType(ChromeTest)
       }
     }
@@ -66,8 +66,8 @@ project {
     }
 }
 
-object PhantomTest : BuildType({
-  name = "Phantom Test"
+object FirefoxTest : BuildType({
+  name = "Firefox Test"
 
   vcs {
     root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
@@ -75,9 +75,9 @@ object PhantomTest : BuildType({
 
   steps{
     script {
-      name = "Phantom Test"
+      name = "Firefox Test"
       scriptContent = """
-          npm run test-phantomjs
+          npm run test-Firefox
         """.trimIndent()
     }
   }
