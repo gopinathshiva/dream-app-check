@@ -33,41 +33,19 @@ project {
 
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
-//    buildType(Build)
-//    buildType(FirefoxTest)
-//    buildType(ChromeTest)
+    buildType(Build)
+    buildType(FirefoxTest)
+    buildType(ChromeTest)
 
-    val buildChain = sequential {
-      buildType(Build)
-      parallel {
-        buildType(FirefoxTest)
-        buildType(ChromeTest)
-      }
-    }
-
-    buildChain.buildTypes().forEach { buildType(it) }
-
-    features {
-      add {
-        feature {
-          type = "project-graphs"
-          id = "PROJECT_EXT_5"
-          param("series", """
-                      [
-                        {
-                          "type": "valueType",
-                          "title": "Build Duration (excluding Checkout Time)",
-                          "sourceBuildTypeId": "DreamAppCheck_Build",
-                          "key": "BuildDurationNetTime"
-                        }
-                      ]
-                  """.trimIndent())
-          param("format", "text")
-          param("title", "New chart title")
-          param("seriesTitle", "Serie")
-        }
-      }
-    }
+//    val buildChain = sequential {
+//      buildType(Build)
+//      parallel {
+//        buildType(FirefoxTest)
+//        buildType(ChromeTest)
+//      }
+//    }
+//
+//    buildChain.buildTypes().forEach { buildType(it) }
 }
 
 object FirefoxTest : BuildType({
