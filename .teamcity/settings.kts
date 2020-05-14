@@ -35,29 +35,56 @@ project {
     vcsRoot(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
 
     buildType(Build)
+    buildType(Test)
 
-  features {
-    add {
-      feature {
-        type = "project-graphs"
-        id = "PROJECT_EXT_5"
-        param("series", """
-                    [
-                      {
-                        "type": "valueType",
-                        "title": "Build Duration (excluding Checkout Time)",
-                        "sourceBuildTypeId": "DreamAppCheck_Build",
-                        "key": "BuildDurationNetTime"
-                      }
-                    ]
-                """.trimIndent())
-        param("format", "text")
-        param("title", "New chart title")
-        param("seriesTitle", "Serie")
+
+    features {
+      add {
+        feature {
+          type = "project-graphs"
+          id = "PROJECT_EXT_5"
+          param("series", """
+                      [
+                        {
+                          "type": "valueType",
+                          "title": "Build Duration (excluding Checkout Time)",
+                          "sourceBuildTypeId": "DreamAppCheck_Build",
+                          "key": "BuildDurationNetTime"
+                        }
+                      ]
+                  """.trimIndent())
+          param("format", "text")
+          param("title", "New chart title")
+          param("seriesTitle", "Serie")
+        }
       }
     }
-  }
 }
+
+object Test : BuildType({
+  name = "Test"
+
+  vcs {
+    root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
+  }
+
+  steps{
+    script {
+      name = "Test"
+      scriptContent = """
+          npm run test-phantomjs
+          npm run test-chrome
+        """.trimIndent()
+    }
+  }
+
+  dependencies{
+    snapshot(Build){}
+  }
+
+  artifactRules = "coverage/my-dream-app => coverage.zip"
+
+})
 
 object Build : BuildType({
     name = "Build"
@@ -74,13 +101,6 @@ object Build : BuildType({
       script {
         name = "Lint"
         scriptContent = "npm run lint"
-      }
-      script {
-        name = "Test"
-        scriptContent = """
-          npm run test-phantomjs
-          npm run test-chrome
-        """.trimIndent()
       }
       script {
         name = "Build"
