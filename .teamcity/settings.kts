@@ -120,7 +120,7 @@ object Build : BuildType({
     vcs {
         root(HttpsGithubComGopinathshivaDreamAppCheckRefsHeadsMaster)
     }
-  
+
     steps{
 //      script {
 //        name = "Install"
@@ -136,7 +136,7 @@ object Build : BuildType({
 //      }
         script{
           name = "echo"
-          scriptContent = "echo successful %teamcity.build.branch%"
+          scriptContent = "echo successful"
         }
     }
 
