@@ -49,7 +49,7 @@ project {
 
     subProject {
       id("sub_project_id")
-      parentId("DreamAppCheck_Build")
+      parentId("DreamAppCheck")
       name = "first sub project"
     }
 }
