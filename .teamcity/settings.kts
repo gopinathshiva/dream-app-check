@@ -48,11 +48,6 @@ project {
     buildChain.buildTypes().forEach { buildType(it) }
 }
 
-project {
-  id("DreamAppCheck")
-  name = "Dream App Check"
-}
-
 object FirefoxTest : BuildType({
   name = "Firefox Test"
 
