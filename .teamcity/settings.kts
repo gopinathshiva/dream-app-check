@@ -48,9 +48,9 @@ project {
     buildChain.buildTypes().forEach { buildType(it) }
 
     subProject {
+      id("sub_project_id")
+      parentId("DreamAppCheck_Build")
       name = "first sub project"
-
-      buildType(Build)
     }
 }
 
