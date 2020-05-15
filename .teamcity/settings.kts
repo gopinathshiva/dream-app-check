@@ -46,6 +46,12 @@ project {
     }
 
     buildChain.buildTypes().forEach { buildType(it) }
+
+    subProject {
+      name = "first sub project"
+
+      buildType(Build)
+    }
 }
 
 object FirefoxTest : BuildType({
